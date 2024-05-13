@@ -1,0 +1,23 @@
+{
+  "name": "truemates",
+  "version": "1.0.0",
+  "description": "Truemates backend in Express with database and blog storage functionality. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anthonytk31415/TrueMates.git"
+  },
+  "author": "Anthony Trankiem",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anthonytk31415/TrueMates/issues"
+  },
+  "homepage": "https://github.com/anthonytk31415/TrueMates#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
