@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "",
+    "password": "",
+    "database": "truemates",
+    "host": "127.0.0.1",
+    "dialect": "postgres" 
+  },
+  "test": {
+    "username": "",
+    "password": "",
+    "database": "truemates",
+    "host": "127.0.0.1",
+    "dialect": "postgres" 
+  },
+  "production": {
+    "username": "",
+    "password": "",
+    "database": "truemates",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
