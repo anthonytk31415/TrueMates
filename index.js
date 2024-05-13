@@ -1,22 +1,18 @@
+
+const sequelize = require('./databases/sequelize');
+require("dotenv").config();
+
 console.log("hello world");
 
-require('dotenv').config();
-const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize(
-        'truemates', 
-        process.env.DB_USERNAME, 
-        process.env.DB_KEY, {
-    host: process.env.DB_HOST,
-    dialect: 'postgres',
-});
-
+// sample call to sequelize
 sequelize
-    .authenticate()
-    .then(() => {
-        console.log("db connection successful. ");
-    })
-    .catch((err) => {
-        console.error("unable to connect to db.", err);
-    });
+  .authenticate()
+  .then(() => {
+    console.log("db connection successful. ");
+  })
+  .catch((err) => {
+    console.error("unable to connect to db.", err);
+  });
+
 
