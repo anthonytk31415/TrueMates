@@ -18,9 +18,9 @@ const User = sequelize.define('User', {
         unique: true
     }
 }, {
-    timestamps: true, // This line enables automatic timestamps
-    createdAt: 'created_at', // Customize the name of createdAt column if needed
-    updatedAt: 'updated_at' // Customize the name of updatedAt column if needed
+    timestamps: true, 
+    createdAt: 'created_at', 
+    updatedAt: 'updated_at' 
 });
 
 module.exports = User;
