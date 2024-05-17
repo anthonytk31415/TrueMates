@@ -7,9 +7,6 @@ const bucketName = process.env.GOOGLE_BUCKET_NAME;
 const projectId = googleProjectId; 
 const keyFilename = gpdKeyPath;
 
-
-////// THIS CODE IS CURRENTLY IN CONSTRUCTION /////
-
 const express = require("express");
 const router = express.Router();
 
@@ -37,21 +34,21 @@ async function uploadFile(filename, uploadFile){
       const file = bucket.file(filename);
       await file.save(uploadFile);            
     } catch (error) {
-      console.error("Unalbe to upload file to blog storage");
+      console.error("Unable to upload file to blog storage");
       throw { code: 500, message: "Internal server error"}
     }
 }
 
 // test function that can get DELETED
-router.get("/download", async function (req, res) {
-    try {
-      const file = await fetchImage(fileName); 
-      file.createReadStream().pipe(res);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Error downloading file');
-    }
-  });
+// router.get("/download", async function (req, res) {
+//     try {
+//       const file = await fetchImage(fileName); 
+//       file.createReadStream().pipe(res);
+//     } catch (error) {
+//       console.error(error);
+//       res.status(500).send('Error downloading file');
+//     }
+//   });
 
 // router.post("/uploadfile", async function (req, res) {
 //     try {
