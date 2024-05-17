@@ -27,6 +27,7 @@ Register a user. Requiers in the body 3 fields:
 - username
 - email
 - password
+
 Currently, we do not require any restrictions to these fields. They are simply strings.
 
 *POST /register sample call in Postman:*
@@ -36,6 +37,7 @@ Currently, we do not require any restrictions to these fields. They are simply s
 Log a user in. Provide 2 fields in the body: 
 - email
 - password
+
 If you are successfully authenticated, you'll receive the JWT token in the payload. 
 
 *POST /login sample call in Postman:*
