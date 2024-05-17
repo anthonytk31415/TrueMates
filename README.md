@@ -31,6 +31,7 @@ Register a user. Requiers in the body 3 fields:
 Currently, we do not require any restrictions to these fields. They are simply strings.
 
 *POST /register sample call in Postman:*
+
 ![POST /register sample call in Postman:](images/1_post_register.png)
 
 #### POST /login
@@ -41,6 +42,7 @@ Log a user in. Provide 2 fields in the body:
 If you are successfully authenticated, you'll receive the JWT token in the payload. 
 
 *POST /login sample call in Postman:*
+
 ![POST /login sample call in Postman:](images/2_post_login.png)
 
 #### POST /posts
@@ -49,8 +51,11 @@ Create a post. We require the user to be logged in and to pass the JWT tokens in
 - images: the image(s) uploaded to the post. Only up to 1 (and later, up to 5 in a future build) image(s) is(are) allowed.
 
 *POST /posts sample call in Postman - define the image(s):*
+
 ![POST /posts sample call in Postman - define the image(s):](images/3_0_post_posts.png)
+
 *POST /posts sample call in Postman - add the jwt token:*
+
 ![POST /posts sample call in Postman - add the jwt token:](images/3_1_post_posts.png)
 
 ### Future API Endpoints (NOT BUILT YET)
