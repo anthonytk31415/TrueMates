@@ -29,6 +29,8 @@ Register a user. Requiers in the body 3 fields:
 - password
 Currently, we do not require any restrictions to these fields. They are simply strings.
 
+![Image Alt Text](images/1_post_register.png)
+
 #### POST /login
 Log a user in. Provide 2 fields in the body: 
 - email
