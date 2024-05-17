@@ -8,8 +8,6 @@ const projectId = googleProjectId;
 const keyFilename = gpdKeyPath;
 
 
-const messages = require('../message.constants');
-
 ////// THIS CODE IS CURRENTLY IN CONSTRUCTION /////
 
 const express = require("express");
