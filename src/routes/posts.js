@@ -67,9 +67,23 @@ router.post('/posts', verifyAuth, upload.array('images'), async function(req, re
     }
 });
 
-// router.post('/posts/:postId/time', verifyAuth, upload.array('images'), async function(req, res) {
-
-// }); 
+router.post('/posts/:postId/time', verifyAuth, async function(req, res) {
+    const postId = req.params.postId;
+    try {
+        let postTimeDiffFromNow = await Post.getTimeDiffFromNow(postId);
+        if (!postTimeDiffFromNow){
+            throw { code: 400, message: "Invalid postId"};; 
+        }
+        return res.status(200).json({ timeDiffFromNow: postTimeDiffFromNow}); 
+    } catch(error){
+        console.error(error);             
+        if (error.code && error.message){
+            res.status(error.code).json({ error: error.message });
+        } else {
+            res.status(500).json({ error: "Internal service error" });
+        }
+    }
+}); 
     
 
 
