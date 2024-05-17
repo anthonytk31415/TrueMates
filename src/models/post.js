@@ -45,8 +45,13 @@ Post.updateImageAndTimestamp = async function (postId, newImages) {
     return updatedPost;
 };
 
-// Post.calculateTimeDiff = async function (postId, newImages) {
+// Post.calculateTimeDiff = async function (postId, ) {
+//     try{
+//         let post = await Post.findByPk(postid);
+//         return new Date() - post.getDataValue('created_at');
+//     } catch(error) {
+//         console.error("error with finding time");        
+//     }
 // };
-
 
 module.exports = Post;

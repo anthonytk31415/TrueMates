@@ -17,8 +17,7 @@ router.post('/posts', verifyAuth, upload.array('images'), async function(req, re
         if (files.length > imageLimit){
             console.log("invalid token input.");
             return res.status(400).json({ message: 'You have exceeded the image limit' });
-        };
-    
+        };    
         // create the post to retrieve the postId to place in each image
         let {userId} = req.user;        // user = token
         let {description, images} = req.body; 
@@ -42,7 +41,6 @@ router.post('/posts', verifyAuth, upload.array('images'), async function(req, re
             imageContainer.push(newImage.imageId)                
             await uploadFile(newImage.imageId, imageFile.buffer);
         }
-        throw new Error("fucking shit up to test");
         await Post.updateImageAndTimestamp(postId, imageContainer);
         return res.status(201).json({ message: "Post created successfully" });
     } catch (error) {
@@ -68,5 +66,11 @@ router.post('/posts', verifyAuth, upload.array('images'), async function(req, re
         }
     }
 });
+
+// router.post('/posts/:postId/time', verifyAuth, upload.array('images'), async function(req, res) {
+
+// }); 
+    
+
 
 module.exports = router;
