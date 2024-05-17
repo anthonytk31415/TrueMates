@@ -39,6 +39,24 @@ async function uploadFile(filename, uploadFile){
     }
 }
 
+
+async function deleteFileIfExists(filename) {
+  try {
+    // Check if the file exists
+    const [exists] = await storage.bucket(bucketName).file(filename).exists();
+
+    if (exists) {
+      await storage.bucket(bucketName).file(filename).delete();
+      console.log(`File '${filename}' deleted successfully.`);
+    } else {
+      console.log(`File '${filename}' does not exist in the bucket.`);
+    }
+  } catch (error) {
+    console.error('Error deleting file from bucket:', error);
+    throw { code: 500, message: "Internal server error"};
+  }
+}
+
 // test function that can get DELETED
 // router.get("/download", async function (req, res) {
 //     try {
@@ -62,5 +80,5 @@ async function uploadFile(filename, uploadFile){
 
 
 module.exports = {
-  fetchFile, uploadFile
+  fetchFile, uploadFile, deleteFileIfExists
 };

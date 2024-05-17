@@ -61,7 +61,9 @@ Create a post. We require the user to be logged in and to pass the JWT tokens in
 ### Future API Endpoints (NOT BUILT YET)
 
 #### GET /posts/:postId/time
-Post returning api will calculate the time difference like 2s ago, 10d ago, 4w ago, 8m ago and 1yr ago.
+Post returning api will calculate the time difference like 2s ago, 10d ago, 4w ago, 8m ago and 1yr ago. This specifically will return the time difference: 
+*currentTime - createdTime.*
+
 
 #### PUT /posts/:postId/description
 Update the post description associated with the post id. 

@@ -3,7 +3,7 @@ const express = require("express");
 const multer = require('multer');
 const router = express.Router();
 const { verifyAuth } = require("./authentication");
-const { uploadFile } = require("../config/databases/googleCloud");
+const { uploadFile, deleteFileIfExists } = require("../config/databases/googleCloud");
 const upload = multer();
 const imageLimit = process.env.POST_IMAGE_LIMIT;
 const Post = require("../models/post");
@@ -42,7 +42,7 @@ router.post('/posts', verifyAuth, upload.array('images'), async function(req, re
             imageContainer.push(newImage.imageId)                
             await uploadFile(newImage.imageId, imageFile.buffer);
         }
-
+        throw new Error("fucking shit up to test");
         await Post.updateImageAndTimestamp(postId, imageContainer);
         return res.status(201).json({ message: "Post created successfully" });
     } catch (error) {
@@ -50,9 +50,9 @@ router.post('/posts', verifyAuth, upload.array('images'), async function(req, re
         if (imageContainer){
             for(const imageId of imageContainer){
                 if (await Image.findOne({where: {imageId: imageId}})) {
-                    await Image.destroy({where: {imageId: imageId}}); 
-                }
-                // delete them in GCP
+                    await deleteFileIfExists(imageId);                      // blob delete
+                    await Image.destroy({where: {imageId: imageId}});       // RDB delete
+                }                
             }
         }
         if (newPost){
@@ -60,10 +60,6 @@ router.post('/posts', verifyAuth, upload.array('images'), async function(req, re
                 await Post.destroy({where: {postId: newPost.postId}}); 
             }
         }
-        // console.error("Failed to create the post: ", error.message)
-        // const errorMessage = "Could not create the post."; 
-        // res.status(500).json({ error: errorMessage });
-
         console.error(error);             
         if (error.code && error.message){
             res.status(error.code).json({ error: error.message });
@@ -72,16 +68,5 @@ router.post('/posts', verifyAuth, upload.array('images'), async function(req, re
         }
     }
 });
-    // get images files
-
-    // // add in the GCP code with the array of images
-
-
-
-
-
-
-// })
-
 
 module.exports = router;

@@ -45,7 +45,8 @@ Post.updateImageAndTimestamp = async function (postId, newImages) {
     return updatedPost;
 };
 
-
+// Post.calculateTimeDiff = async function (postId, newImages) {
+// };
 
 
 module.exports = Post;
