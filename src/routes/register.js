@@ -31,7 +31,6 @@ async function createLogin(userId, password) {
 router.post("/register", async function (req, res, next) {
   try {
     let { username, email, password } = req.body;
-    // add in error for null username, email, password
     let user = await User.findOne({
       where: {
         [Op.or]: [{ name: username }, { email: email }],

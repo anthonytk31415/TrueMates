@@ -46,9 +46,9 @@ If you are successfully authenticated, you'll receive the JWT token in the paylo
 ![POST /login sample call in Postman:](images/2_post_login.png)
 
 #### POST /posts
-Create a post. We require the user to be logged in and to pass the JWT tokens in the Authorization header of HTTP request. We also need in the body: 
-- description: the descriptionn of the post
-- images: the image(s) uploaded to the post. Only up to 1 (and later, up to 5 in a future build) image(s) is(are) allowed.
+Create a post. We require the user to be logged in and to pass the JWT tokens in the Authorization header of HTTP request using Form data. We also need in the body: 
+- description: the description of the post
+- images: the image(s) uploaded to the post. Only up to 5 image(s) are allowed.
 
 *POST /posts sample call in Postman - define the image(s):*
 
@@ -66,8 +66,11 @@ Post returning api will calculate the time difference like 2s ago, 10d ago, 4w a
 
 Note these important items: we require (1) login, and (2) any postId, as long as it is valid, is acceptable input. 
 
+*GET /posts/:postId/time:*
+![GET /posts/:postId/time:](images/4_get_time.png)
+
 #### PUT /posts/:postId/description
-Update the post description associated with the post id. 
+Update the post description associated with the post id. Form data or raw json payload is OK.
 
 #### POST /friends/add
 Add friend. Requiers login. 

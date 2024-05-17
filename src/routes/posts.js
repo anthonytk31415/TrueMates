@@ -9,6 +9,11 @@ const imageLimit = process.env.POST_IMAGE_LIMIT;
 const Post = require("../models/post");
 const Image = require("../models/image");
 
+
+/**
+ * POST /posts
+ * Uploads description and array from the html payload to create a post. 
+ */
 router.post('/posts', verifyAuth, upload.array('images'), async function(req, res) {
     let newPost; 
     let imageContainer = []; 
@@ -67,8 +72,13 @@ router.post('/posts', verifyAuth, upload.array('images'), async function(req, re
     }
 });
 
-router.post('/posts/:postId/time', verifyAuth, async function(req, res) {
+/**
+ * GET /posts/:postId/time
+ * Get the time delta from now to created time for a specific postId.
+ */
+router.get('/posts/:postId/time', verifyAuth, async function(req, res) {
     const postId = req.params.postId;
+    
     try {
         let postTimeDiffFromNow = await Post.getTimeDiffFromNow(postId);
         if (!postTimeDiffFromNow){
@@ -84,7 +94,40 @@ router.post('/posts/:postId/time', verifyAuth, async function(req, res) {
         }
     }
 }); 
-    
+
+/**
+ * PUT /posts/:postId/description
+ * Update the postId for a given post. user must be logged in and own that postId. 
+ */
+router.put('/posts/:postId/description', verifyAuth, upload.array('images'), async function(req, res) {
+    try {
+        const postId = req.params.postId;
+        let { userId } = req.user;        // user = token
+        let { description } = req.body; 
+        let curPost = await Post.findOne({
+            where: { postId: postId, userId: userId
+        }});
+        if (!curPost){
+            throw { code: 400, message: "Invalid request: invalid postId and/or userId"};    
+        }
+        const updatedPost = await Post.update({
+            description: description
+            }, {
+            where: { postId: postId, userId: userId}
+        });
+        if (!updatedPost){
+            throw { code: 500, message: "Internal service error"};
+        }
+        return res.status(202).json({ message: "Post successfully updated"}); 
+    } catch(error){
+        console.error(error);             
+        if (error.code && error.message){
+            res.status(error.code).json({ error: error.message });
+        } else {
+            res.status(500).json({ error: "Internal service error" });
+        }
+    }
+}); 
 
 
 module.exports = router;
