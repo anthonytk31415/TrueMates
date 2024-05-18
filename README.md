@@ -73,20 +73,28 @@ Update the post description associated with the post id. Form data or raw json p
 *PUT /posts/:postId/description:*
 ![PUT /posts/:postId/description:](images/5_put_post_description.png)
 
-### Future API Endpoints (NOT BUILT YET)
-
 #### POST /friend/:friendId
-Add friend if relationship doesn't exist. Requiers login. 
+Add friend if relationship doesn't exist. Requiers login. Table in RDB is a many-to-many by userId setup. 
 
-#### GET /friends
-Friends List endpoint returns friends' info and number of mutual friends (i.e. count of common friends of friend A - yourself, and friend B). Requires login. 
+*POST /friend/:friendId*
+![POST /friend/:friendId](images/6_post_addfriend.png)
+
+
+#### GET /friend/:friendId
+Friends List endpoint returns friends' info and number of mutual friends (i.e. count of common friends of friend A - yourself, and friend B). Requires login. Output is an object (dictionary) with keys: mutualFriends (count of common friends), and friendsInfo (an array of infos of friends). 
+
+*GET /friend/:friendId*
+![GET /friend/:friendId](images/7_get_mutualFriend.png)
+
+
 
 ### PostgreSQL Database Guide
 Here's a summary of our tables below:
-- User - houses user id and metadata for user (name, email, creation).
-- Post - contains post data: description and array of image id’s.
-- Login - contains user id and pw.
-- Image - images ids and their post they belong to. image ids are the keys to the associated images stored in blob storage.  
+- Users - houses user id and metadata for user (name, email, creation).
+- Posts - contains post data: description and array of image id’s.
+- Logins - contains user id and pw.
+- Images - images ids and their post they belong to. image ids are the keys to the associated images stored in blob storage.  
+- FriendConnections - friend connections between user ID A and B. B to A cannot exist by virtue of how it's built. Many to Many relationship with userId from User table. 
 
 ### Google Cloud Bucket Guide
 Image names are the id’s that are defined in the image file. We then use the image id to do key retrieval when we save and retrieve images from the bucket. 
