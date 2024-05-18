@@ -67,10 +67,13 @@ Note these important items: we require (1) login, and (2) any postId, as long as
 *GET /posts/:postId/time:*
 ![GET /posts/:postId/time:](images/4_get_time.png)
 
+
 #### PUT /posts/:postId/description
 Update the post description associated with the post id. Form data or raw json payload is OK.
 
+
 *PUT /posts/:postId/description:*
+
 ![PUT /posts/:postId/description:](images/5_put_post_description.png)
 
 #### POST /friend/:friendId
