@@ -87,6 +87,7 @@ Add friend if relationship doesn't exist. Requiers login. Table in RDB is a many
 Friends List endpoint returns friends' info and number of mutual friends (i.e. count of common friends of friend A - yourself, and friend B). Requires login. Output is an object (dictionary) with keys: mutualFriends (count of common friends), and friendsInfo (an array of infos of friends). 
 
 *GET /friend/:friendId*
+
 ![GET /friend/:friendId](images/7_get_mutualFriend.png)
 
 
