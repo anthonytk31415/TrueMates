@@ -58,8 +58,6 @@ Create a post. We require the user to be logged in and to pass the JWT tokens in
 
 ![POST /posts sample call in Postman - add the jwt token:](images/3_1_post_posts.png)
 
-### Future API Endpoints (NOT BUILT YET)
-
 #### GET /posts/:postId/time
 Post returning api will calculate the time difference like 2s ago, 10d ago, 4w ago, 8m ago and 1yr ago. This specifically will return the time difference: 
 *currentTime - createdTime.*
@@ -72,8 +70,13 @@ Note these important items: we require (1) login, and (2) any postId, as long as
 #### PUT /posts/:postId/description
 Update the post description associated with the post id. Form data or raw json payload is OK.
 
-#### POST /friends/add
-Add friend. Requiers login. 
+*PUT /posts/:postId/description:*
+![PUT /posts/:postId/description:](images/5_put_post_description.png)
+
+### Future API Endpoints (NOT BUILT YET)
+
+#### POST /friend/:friendId
+Add friend if relationship doesn't exist. Requiers login. 
 
 #### GET /friends
 Friends List endpoint returns friends' info and number of mutual friends (i.e. count of common friends of friend A - yourself, and friend B). Requires login. 
@@ -98,3 +101,4 @@ Image names are the id’s that are defined in the image file. We then use the i
 - Input validation for request data. For example, verifying that an email is indeed an email, that a password contains enough complexity, that names have sufficient length, etc.
 - A rate limiter.
 - A cache for frequently used resources.
+- A complete, robust deletion logic when we introduce resource deletion (post, user, etc.) and how to handle deletion across all tables (e.g. you delete a user, do you then delete the friends connections? Currently, we say yes to that).

@@ -30,11 +30,10 @@ const Post = sequelize.define('Post', {
     updatedAt: 'updated_at' 
 });
 
-
 Post.belongsTo(User, {foreignKey: 'userId'});
 
 Post.updateImageAndTimestamp = async function (postId, newImages) {
-    const updatedPost = await Post.update({
+    return await Post.update({
         images: newImages,
         updated_at: Sequelize.literal('CURRENT_TIMESTAMP')
     }, {
@@ -42,8 +41,16 @@ Post.updateImageAndTimestamp = async function (postId, newImages) {
             postId: postId
         }
     });
-    return updatedPost;
 };
+
+Post.updateDescriptionAndTimestamp = async function (postId, userId, description) {
+    return await Post.update({
+        description: description, 
+        updated_at: Sequelize.literal('CURRENT_TIMESTAMP')
+        }, {
+        where: { postId: postId, userId: userId}
+    });
+}
 
 
 /**

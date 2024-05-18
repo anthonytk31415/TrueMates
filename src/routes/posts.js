@@ -110,11 +110,7 @@ router.put('/posts/:postId/description', verifyAuth, upload.array('images'), asy
         if (!curPost){
             throw { code: 400, message: "Invalid request: invalid postId and/or userId"};    
         }
-        const updatedPost = await Post.update({
-            description: description
-            }, {
-            where: { postId: postId, userId: userId}
-        });
+        const updatedPost = await Post.updateDescAndTimestamp(postId, userId, description);
         if (!updatedPost){
             throw { code: 500, message: "Internal service error"};
         }
